@@ -1,0 +1,30 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #132238;
+  background: #eef3f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+.shell { max-width: 1160px; margin: 0 auto; padding: 28px 28px 64px; }
+.nav { display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; gap: 10px; align-items: center; font-weight: 760; letter-spacing: -0.02em; }
+.brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: #fff; background: #ef8354; font-size: 17px; }
+.stage-pill { padding: 8px 12px; border: 1px solid #d7e0eb; border-radius: 99px; color: #60728a; background: rgba(255,255,255,.55); font-size: 12px; font-weight: 700; }
+.hero { padding: 116px 0 84px; max-width: 760px; }
+.eyebrow, .card-kicker { color: #ef8354; text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 800; }
+h1 { margin: 14px 0 16px; color: #10233d; font-size: clamp(54px, 9vw, 104px); line-height: .94; letter-spacing: -.075em; }
+.lede { max-width: 560px; margin: 0; color: #60728a; font-size: 20px; line-height: 1.55; }
+.health { display: inline-flex; align-items: center; gap: 9px; margin-top: 28px; padding: 10px 14px; border-radius: 99px; background: #fff; color: #60728a; font-size: 13px; font-weight: 700; box-shadow: 0 7px 24px rgba(24, 48, 80, .06); }
+.health-dot { width: 8px; height: 8px; border-radius: 50%; background: #f0b35a; }
+.health-online .health-dot { background: #3cb179; }.health-offline .health-dot { background: #db6d67; }
+.workflow { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #ced9e5; border-bottom: 1px solid #ced9e5; }
+.workflow-step { display: flex; gap: 12px; align-items: center; padding: 20px 0; color: #60728a; font-size: 13px; font-weight: 700; }
+.step-number { color: #a3b2c5; font-variant-numeric: tabular-nums; font-size: 11px; }
+.cards { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; padding-top: 18px; }
+.card { min-height: 220px; padding: 30px; border: 1px solid #d9e3ee; border-radius: 22px; background: rgba(255,255,255,.7); }
+.card-dark { color: #fff; border-color: #1b3655; background: #132b47; }
+.card-dark .card-kicker { color: #f6ae86; }.card h2 { max-width: 420px; margin: 18px 0 10px; font-size: 26px; letter-spacing: -.04em; }.card p { max-width: 440px; margin: 0; color: #71839a; line-height: 1.6; }.card-dark p { color: #b9c9da; }
+@media (max-width: 680px) { .shell { padding: 20px 18px 48px; }.hero { padding: 88px 0 60px; }.workflow { display: flex; overflow-x: auto; gap: 24px; }.workflow-step { min-width: max-content; }.cards { grid-template-columns: 1fr; } }

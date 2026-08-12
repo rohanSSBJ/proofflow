@@ -1,0 +1,17 @@
+[Unit]
+Description=ProofFlow API
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/srv/proofflow/current/apps/api
+EnvironmentFile=/srv/proofflow/shared/api.env
+ExecStart=/usr/bin/node /srv/proofflow/current/apps/api/dist/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

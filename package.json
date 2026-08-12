@@ -1,0 +1,19 @@
+{
+  "name": "proofflow",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ProofFlow evidence-based work and compliance platform",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @proofflow/api & npm run dev --workspace @proofflow/web",
+    "build": "npm run build --workspace @proofflow/api && npm run build --workspace @proofflow/web",
+    "lint": "npm run typecheck --workspace @proofflow/api",
+    "typecheck": "npm run typecheck --workspace @proofflow/api",
+    "db:generate": "npm run db:generate --workspace @proofflow/api",
+    "db:migrate": "npm run db:migrate --workspace @proofflow/api",
+    "start:api": "npm run start --workspace @proofflow/api"
+  }
+}
