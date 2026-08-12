@@ -27,7 +27,7 @@ This plan follows `docs/ARCHITECTURE.md` and keeps the first deployment small en
 - [x] Add organization invitations and acceptance flow.
 - [ ] Add durable integration tests for policy authorization and tenant isolation.
 - [ ] Implement state-machine task transitions with atomic audit events.
-- [ ] Replace the foundation page with role-aware project/task views.
+- [x] Replace the foundation page with the ported ProofFlow marketing design and role-aware project/task views.
 
 ### Phase 2 — proof workflow
 
@@ -36,8 +36,10 @@ This plan follows `docs/ARCHITECTURE.md` and keeps the first deployment small en
 - [ ] Add malware scanning and quarantine-to-accepted promotion.
 - [x] Add immutable evidence records and submission revisions.
 - [x] Add the initial review, rejection-reason, resubmission, and verification transactions.
-- [x] Add the auditor review queue API; contributor and auditor web views remain pending.
+- [x] Add the auditor review queue API plus contributor and auditor workflow views.
 - [x] Test the complete assigned-to-verified API journey.
+- [x] Add an Axios API client, in-memory access tokens, refresh-cookie rotation, active organization context, and TanStack Query server state.
+- [x] Add real registration, login, invitation acceptance, member management, project/task planning, S3 evidence upload, submission, review, rejection, and verification screens.
 
 ### Phase 3 — operating controls
 
@@ -64,9 +66,9 @@ This plan follows `docs/ARCHITECTURE.md` and keeps the first deployment small en
 - The PEM file is ignored and is never copied to EC2.
 - The initial Prisma migration is applied only after PostgreSQL connectivity is verified.
 
-## Deployment status — 2026-08-12
+## Deployment status — 2026-08-13
 
-- Release: `/srv/proofflow/releases/20260812231402`
+- Release: `/srv/proofflow/releases/20260813005243`
 - Active symlink: `/srv/proofflow/current`
 - API service: `proofflow-api.service`, enabled and active under systemd
 - Nginx: active and serving the React build on port 80
@@ -75,7 +77,8 @@ This plan follows `docs/ARCHITECTURE.md` and keeps the first deployment small en
 - Verified task foundation: milestone/task creation, assignment, guarded transitions, dependency-cycle rejection, evidence-transition blocking, and last-admin protection
 - Verified proof workflow: invitation creation and acceptance, mandatory evidence requirements, rejection reason enforcement, revision resubmission, approval, and final verification
 - Verified S3 workflow: EC2 IAM-role authentication, private presigned upload/download URLs, object round-trip integrity, size/type validation, and evidence submission gating on uploaded objects
-- Not yet production-ready: TLS/domain, backup/restore validation, S3 CORS/domain configuration, malware scanning, web workflow views, and durable integration tests
+- Verified frontend: ported ProofFlow visual system, real auth/session client, role-aware protected routes, project/task/member workflows, and evidence/review screens; root, login, and deep-link SPA routes return HTTP 200
+- Not yet production-ready: TLS/domain, backup/restore validation, S3 CORS/domain configuration, malware scanning, durable browser integration tests, and the Phase 3/4 operating-control modules
 - Smoke fixtures were removed after verification; no test users or organizations remain from the smoke runs
 
 ## Release database order

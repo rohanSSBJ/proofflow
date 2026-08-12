@@ -1,56 +1,30 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const api = axios.create({ baseURL: '/api' });
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { AppShell } from './components/AppShell.jsx';
+import { ProtectedRoute } from './components/ProtectedRoute.jsx';
+import { InvitationPage, LoginPage, RegisterPage } from './pages/AuthPages.jsx';
+import { DashboardPage } from './pages/DashboardPage.jsx';
+import { LandingPage } from './pages/LandingPage.jsx';
+import { MembersPage } from './pages/MembersPage.jsx';
+import { ProjectPage } from './pages/ProjectPage.jsx';
+import { ProjectsPage } from './pages/ProjectsPage.jsx';
+import { ReviewsPage } from './pages/ReviewsPage.jsx';
+import { TaskPage } from './pages/TaskPage.jsx';
 
 export default function App() {
-  const [health, setHealth] = useState({ state: 'checking', message: 'Checking API…' });
-
-  useEffect(() => {
-    api.get('/health/live')
-      .then(({ data }) => setHealth({ state: 'online', message: `${data.service} is live` }))
-      .catch(() => setHealth({ state: 'offline', message: 'API is not reachable yet' }));
-  }, []);
-
-  return (
-    <main className="shell">
-      <nav className="nav">
-        <div className="brand"><span className="brand-mark">P</span> ProofFlow</div>
-        <span className="stage-pill">Foundation build</span>
-      </nav>
-
-      <section className="hero">
-        <div className="eyebrow">Evidence-based work management</div>
-        <h1>Turn work into proof.</h1>
-        <p className="lede">
-          ProofFlow connects obligations, execution, evidence, review, and auditable outcomes.
-        </p>
-        <div className={`health health-${health.state}`}>
-          <span className="health-dot" /> {health.message}
-        </div>
-      </section>
-
-      <section className="workflow" aria-label="ProofFlow workflow">
-        {['Assigned', 'In progress', 'Evidence', 'Review', 'Verified'].map((step, index) => (
-          <div className="workflow-step" key={step}>
-            <span className="step-number">0{index + 1}</span>
-            <span>{step}</span>
-          </div>
-        ))}
-      </section>
-
-      <section className="cards">
-        <article className="card card-dark">
-          <span className="card-kicker">Now building</span>
-          <h2>Trustworthy task foundation</h2>
-          <p>Tenant isolation, role-aware planning, task history, and deployment health are the first layer.</p>
-        </article>
-        <article className="card">
-          <span className="card-kicker">Next</span>
-          <h2>Evidence workflow</h2>
-          <p>Immutable evidence revisions, review decisions, rejection reasons, and verification transitions.</p>
-        </article>
-      </section>
-    </main>
-  );
+  return <Routes>
+    <Route path="/" element={<LandingPage />} />
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
+    <Route path="/signup" element={<Navigate to="/register" replace />} />
+    <Route path="/accept-invitation" element={<InvitationPage />} />
+    <Route path="/app" element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
+      <Route index element={<DashboardPage />} />
+      <Route path="projects" element={<ProjectsPage />} />
+      <Route path="projects/:projectId" element={<ProjectPage />} />
+      <Route path="projects/:projectId/tasks/:taskId" element={<TaskPage />} />
+      <Route path="reviews" element={<ProtectedRoute roles={['ADMIN', 'MANAGER', 'AUDITOR']}><ReviewsPage /></ProtectedRoute>} />
+      <Route path="members" element={<MembersPage />} />
+    </Route>
+    <Route path="*" element={<Navigate to="/" replace />} />
+  </Routes>;
 }
